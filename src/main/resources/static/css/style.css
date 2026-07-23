@@ -1,0 +1,308 @@
+/* ==========================
+   PORTIX LANDING PAGE
+========================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:#060b1f;
+    color:white;
+}
+
+/* ================= NAVBAR ================= */
+
+nav{
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    padding:18px 80px;
+
+    background:#0b132b;
+
+    position:sticky;
+    top:0;
+
+    z-index:999;
+}
+
+.logo{
+
+    display:flex;
+    align-items:center;
+    gap:18px;
+
+}
+
+.logo img{
+
+    width:70px;
+    border-radius:10px;
+
+}
+
+.logo span{
+
+    font-size:42px;
+    font-weight:700;
+
+}
+
+nav div:last-child{
+
+    display:flex;
+    gap:45px;
+
+}
+
+nav a{
+
+    color:white;
+    text-decoration:none;
+    font-size:20px;
+    transition:.3s;
+
+}
+
+nav a:hover{
+
+    color:#19b8ff;
+
+}
+
+/* ================= HERO ================= */
+
+.hero{
+
+    min-height:85vh;
+
+    display:flex;
+    flex-direction:column;
+
+    justify-content:center;
+    align-items:center;
+
+    text-align:center;
+
+    padding:40px;
+
+}
+
+.hero h1{
+
+    font-size:76px;
+    line-height:1.15;
+    max-width:1100px;
+    font-weight:800;
+
+    background:linear-gradient(
+    90deg,
+    #16b8ff,
+    #6f5bff,
+    #b53ed6,
+    #ff9800);
+
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+
+}
+
+.hero p{
+
+    margin-top:35px;
+
+    font-size:28px;
+
+    color:#dddddd;
+
+    max-width:950px;
+
+    line-height:1.8;
+
+}
+
+.hero a{
+
+    margin-top:55px;
+
+    display:inline-block;
+
+    text-decoration:none;
+
+    color:white;
+
+    font-size:24px;
+
+    font-weight:600;
+
+    padding:20px 65px;
+
+    border-radius:60px;
+
+    background:linear-gradient(
+    90deg,
+    #16b8ff,
+    #8a2be2,
+    #ff9800);
+
+    transition:.3s;
+
+}
+
+.hero a:hover{
+
+    transform:translateY(-5px);
+
+    box-shadow:0 15px 30px rgba(0,0,0,.35);
+
+}
+
+/* ================= FEATURES ================= */
+
+.features{
+
+    width:90%;
+
+    margin:80px auto;
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(270px,1fr));
+
+    gap:30px;
+
+}
+
+.card{
+
+    background:#101a37;
+
+    border-radius:20px;
+
+    padding:35px;
+
+    transition:.35s;
+
+    border:1px solid rgba(255,255,255,.08);
+
+}
+
+.card:hover{
+
+    transform:translateY(-10px);
+
+    border-color:#16b8ff;
+
+    box-shadow:0 18px 40px rgba(0,0,0,.35);
+
+}
+
+.card h2{
+
+    margin-bottom:18px;
+
+    font-size:30px;
+
+}
+
+.card p{
+
+    color:#d0d0d0;
+
+    font-size:18px;
+
+    line-height:1.8;
+
+}
+
+/* ================= FOOTER ================= */
+
+footer{
+
+    margin-top:70px;
+
+    background:#0b132b;
+
+    text-align:center;
+
+    padding:30px;
+
+    color:#cccccc;
+
+    font-size:18px;
+
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:900px){
+
+nav{
+
+flex-direction:column;
+
+padding:20px;
+
+gap:20px;
+
+}
+
+nav div:last-child{
+
+gap:25px;
+
+flex-wrap:wrap;
+
+justify-content:center;
+
+}
+
+.logo span{
+
+font-size:30px;
+
+}
+
+.hero{
+
+min-height:auto;
+
+padding:80px 25px;
+
+}
+
+.hero h1{
+
+font-size:48px;
+
+}
+
+.hero p{
+
+font-size:20px;
+
+}
+
+.hero a{
+
+font-size:20px;
+
+padding:16px 45px;
+
+}
+
+.features{
+
+grid-template-columns:1fr;
+
+}
+
+}

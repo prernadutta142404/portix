@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Edit Job | PORTIX</title>
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<style>
+
+*{
+
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Segoe UI',sans-serif;
+
+}
+
+body{
+
+background:#0b1023;
+color:white;
+padding:40px;
+
+}
+
+.container{
+
+max-width:900px;
+margin:auto;
+
+}
+
+h1{
+
+margin-bottom:30px;
+
+}
+
+form{
+
+background:#18213d;
+padding:30px;
+border-radius:20px;
+
+}
+
+input,
+textarea,
+select{
+
+width:100%;
+padding:14px;
+margin-bottom:20px;
+border:none;
+border-radius:10px;
+background:#202a49;
+color:white;
+
+}
+
+button{
+
+background:#7c5cff;
+color:white;
+padding:14px 30px;
+border:none;
+border-radius:10px;
+cursor:pointer;
+font-size:16px;
+
+}
+
+button:hover{
+
+background:#6845ff;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>
+
+<i class="fa-solid fa-briefcase"></i>
+
+Edit Job
+
+</h1>
+
+<form th:action="@{/recruiter/jobs/update}"
+      th:object="${job}"
+      method="post">
+	  <input type="hidden" th:field="*{id}">
+	  <input
+	  type="text"
+	  th:field="*{jobTitle}"
+	  placeholder="Job Title">
+
+	  <input
+	  type="text"
+	  th:field="*{companyName}"
+	  placeholder="Company Name">
+
+	  <input
+	  type="text"
+	  th:field="*{location}"
+	  placeholder="Location">
+
+	  <input
+	  type="text"
+	  th:field="*{employmentType}"
+	  placeholder="Employment Type">
+
+	  <input
+	  type="text"
+	  th:field="*{experience}"
+	  placeholder="Experience">
+
+	  <input
+	  type="text"
+	  th:field="*{salary}"
+	  placeholder="Salary">
+
+	  <textarea
+	  rows="5"
+	  th:field="*{description}"
+	  placeholder="Job Description"></textarea>
+
+	  <textarea
+	  rows="4"
+	  th:field="*{requiredSkills}"
+	  placeholder="Required Skills"></textarea>
+<button>
+
+Create Job
+
+</button>
+
+</form>
+
+</div>
+
+</body>
+
+</html>

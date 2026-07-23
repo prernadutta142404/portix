@@ -1,0 +1,865 @@
+\<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Candidate Dashboard | PORTIX</title>
+
+    <link rel="stylesheet"
+          th:href="@{/css/dashboard.css}">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+</head>
+
+<style>
+
+.sidebar-link{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    width:100%;
+    text-decoration:none;
+    color:inherit;
+}
+
+</style>
+
+<body>
+
+<div class="dashboard">
+
+    <!-- ===================================================== -->
+    <!-- SIDEBAR -->
+    <!-- ===================================================== -->
+
+    <aside class="sidebar">
+
+        <div class="sidebar-logo">
+
+            <img th:src="@{/images/navbar logo.png}"
+                 alt="PORTIX">
+
+        </div>
+
+        <ul>
+
+			<li class="active">
+			    <a th:href="@{/candidate/dashboard}" class="sidebar-link">
+			        <i class="fa-solid fa-house"></i>
+			        <span>Dashboard</span>
+			    </a>
+			</li>
+
+			<li>
+			    <a th:href="@{/candidate/resume}" class="sidebar-link">
+			        <i class="fa-solid fa-file-arrow-up"></i>
+			        <span>Upload Resume</span>
+			    </a>
+			</li>
+
+			<li>
+
+			    <a th:href="@{/candidate/portfolio}"
+			       class="sidebar-link">
+
+			        <i class="fa-solid fa-folder-open"></i>
+
+			        <span>Portfolio</span>
+
+			    </a>
+
+			</li>
+
+			<li>
+			    <a th:href="@{/candidate/analysis}" class="sidebar-link">
+			        <i class="fa-solid fa-chart-line"></i>
+			        <span>ATS Report</span>
+			    </a>
+			</li>
+			
+			<li>
+			    <a th:href="@{/candidate/jobs}" class="sidebar-link">
+			        <i class="fa-solid fa-briefcase"></i>
+			        <span>Available Jobs</span>
+			    </a>
+			</li>
+
+			<li>
+			    <a th:href="@{/candidate/applications}" class="sidebar-link">
+			        <i class="fa-solid fa-file-circle-check"></i>
+			        <span>My Applications</span>
+			    </a>
+			</li>
+
+            
+
+			<li onclick="window.location.href='/candidate/profile'">
+
+			    <i class="fa-solid fa-user"></i>
+
+			    <span>Profile</span>
+
+			</li>
+
+			<li class="logout">
+			    <a th:href="@{/logout}" class="sidebar-link">
+			        <i class="fa-solid fa-right-from-bracket"></i>
+			        <span>Logout</span>
+			    </a>
+			</li>
+
+        </ul>
+
+    </aside>
+
+    <!-- ===================================================== -->
+    <!-- MAIN CONTENT -->
+    <!-- ===================================================== -->
+
+    <main class="main-content">
+
+        <!-- ================= TOP BAR ================= -->
+
+        <header class="topbar">
+
+            <div>
+
+                <h2>
+
+                    Hello,
+
+                    <span th:text="${profile != null && profile.name != null && !profile.name.isBlank() ? profile.name : 'Candidate'}">
+                        Candidate
+                    </span>
+
+                    👋
+
+                </h2>
+
+                <p>
+
+                    Welcome back to your PORTIX Dashboard
+
+                </p>
+
+            </div>
+
+            <div class="top-icons">
+
+                <i class="fa-regular fa-bell"></i>
+
+                <div class="profile">
+
+                    <div class="avatar">
+
+                        <span th:text="${profile != null && profile.name != null && !profile.name.isBlank() ? profile.name.substring(0,1).toUpperCase() : 'C'}">
+                            C
+                        </span>
+
+                    </div>
+
+                    <span
+                        th:text="${profile != null && profile.recommendedRole != null && !profile.recommendedRole.isBlank() ? profile.recommendedRole : 'Candidate'}">
+
+                        Candidate
+
+                    </span>
+
+                </div>
+
+            </div>
+
+        </header>
+
+        <!-- ================= DASHBOARD ================= -->
+
+        <section class="dashboard-body">
+
+            <h1>
+
+                Candidate Dashboard
+
+            </h1>
+
+            <p>
+
+                Manage your resume, portfolio, ATS score and career journey from one place.
+
+            </p>
+
+            <!-- ================= PROFILE SUMMARY ================= -->
+
+            <div class="profile-summary-card">
+
+                <h2>
+
+                    Profile Summary
+
+                </h2>
+
+                <p>
+
+                    <strong>Name :</strong>
+
+                    <span th:text="${profile != null && profile.name != null ? profile.name : 'Not Available'}">
+
+                        Not Available
+
+                    </span>
+
+                </p>
+
+                <p>
+
+                    <strong>Email :</strong>
+
+                    <span th:text="${profile != null && profile.email != null ? profile.email : 'Not Available'}">
+
+                        Not Available
+
+                    </span>
+
+                </p>
+
+                <p>
+
+                    <strong>Phone :</strong>
+
+                    <span th:text="${profile != null && profile.phone != null ? profile.phone : 'Not Available'}">
+
+                        Not Available
+
+                    </span>
+
+                </p>
+
+                <p>
+
+                    <strong>Recommended Role :</strong>
+
+                    <span th:text="${profile != null && profile.recommendedRole != null ? profile.recommendedRole : 'Not Available'}">
+
+                        Not Available
+
+                    </span>
+
+                </p>
+
+            </div>
+			<!-- ===================================================== -->
+			<!-- DASHBOARD STATISTICS -->
+			<!-- ===================================================== -->
+
+			<div class="stats-grid">
+
+			    <!-- Resume Score -->
+
+			    <div class="stat-card">
+
+			        <i class="fa-solid fa-file-lines"></i>
+
+			        <h3>Resume Score</h3>
+
+			        <span th:text="${resumeScore + '%'}">
+
+			            0%
+
+			        </span>
+
+			    </div>
+
+			    <!-- ATS Score -->
+
+			    <div class="stat-card">
+
+			        <i class="fa-solid fa-chart-line"></i>
+
+			        <h3>ATS Score</h3>
+
+			        <span th:text="${atsScore + '%'}">
+
+			            0%
+
+			        </span>
+
+			    </div>
+
+			    <!-- Profile Completion -->
+
+			    <div class="stat-card">
+
+			        <i class="fa-solid fa-user-check"></i>
+
+			        <h3>Profile Completion</h3>
+
+			        <span th:text="${profileCompletion + '%'}">
+
+			            0%
+
+			        </span>
+
+			    </div>
+
+			    <!-- Portfolio Completion -->
+
+			    <div class="stat-card">
+
+			        <i class="fa-solid fa-folder-open"></i>
+
+			        <h3>Portfolio Completion</h3>
+
+			        <span th:text="${portfolioCompletion + '%'}">
+
+			            0%
+
+			        </span>
+
+			    </div>
+
+			    <!-- Projects -->
+
+			    <div class="stat-card">
+
+			        <i class="fa-solid fa-code"></i>
+
+			        <h3>Projects</h3>
+
+			        <span th:text="${projectCount}">
+
+			            0
+
+			        </span>
+
+			    </div>
+
+			    <!-- Skills -->
+
+			    <div class="stat-card">
+
+			        <i class="fa-solid fa-laptop-code"></i>
+
+			        <h3>Skills</h3>
+
+			        <span th:text="${skillsCount}">
+
+			            0
+
+			        </span>
+
+			    </div>
+
+			    <!-- Certificates -->
+
+			    <div class="stat-card">
+
+			        <i class="fa-solid fa-certificate"></i>
+
+			        <h3>Certificates</h3>
+
+			        <span th:text="${certificateCount}">
+
+			            0
+
+			        </span>
+
+			    </div>
+
+				<div class="stat-card">
+
+				    <i class="fa-solid fa-graduation-cap"></i>
+
+				    <h3>Education</h3>
+
+				    <span th:text="${educationCount}">
+
+				        0
+
+				    </span>
+
+				</div>
+				
+				
+				<div class="stat-card">
+
+				    <i class="fa-solid fa-briefcase"></i>
+
+				    <h3>Experience</h3>
+
+				    <span th:text="${experienceCount}">
+				        0
+				    </span>
+
+				</div>
+
+			    
+
+			</div>	
+			<!-- ===================================================== -->
+			<!-- PROGRESS SECTION -->
+			<!-- ===================================================== -->
+
+			<div class="progress-section">
+
+			    <!-- Resume Progress -->
+
+			    <div class="progress-card">
+
+			        <div class="progress-header">
+
+			            <h3>Resume Completion</h3>
+
+			            <span th:text="${resumeScore + '%'}">
+
+			                0%
+
+			            </span>
+
+			        </div>
+
+			        <div class="progress-bar">
+
+			            <div class="progress-fill"
+
+			                 th:style="'width:' + ${resumeScore} + '%'">
+
+			            </div>
+
+			        </div>
+
+			    </div>
+
+			    <!-- Profile Progress -->
+
+			    <div class="progress-card">
+
+			        <div class="progress-header">
+
+			            <h3>Profile Completion</h3>
+
+			            <span th:text="${profileCompletion + '%'}">
+
+			                0%
+
+			            </span>
+
+			        </div>
+
+			        <div class="progress-bar">
+
+			            <div class="progress-fill"
+
+			                 th:style="'width:' + ${profileCompletion} + '%'">
+
+			            </div>
+
+			        </div>
+
+			    </div>
+
+			    <!-- Portfolio Progress -->
+
+			    <div class="progress-card">
+
+			        <div class="progress-header">
+
+			            <h3>Portfolio Completion</h3>
+
+			            <span th:text="${portfolioCompletion + '%'}">
+
+			                0%
+
+			            </span>
+
+			        </div>
+
+			        <div class="progress-bar">
+
+			            <div class="progress-fill"
+
+			                 th:style="'width:' + ${portfolioCompletion} + '%'">
+
+			            </div>
+
+			        </div>
+
+			    </div>
+
+			</div>
+			<!-- ===================================================== -->
+			<!-- RESUME STATUS -->
+			<!-- ===================================================== -->
+
+			<h2 class="section-title">
+
+			    Resume Status
+
+			</h2>
+
+			<div class="profile-summary-card">
+
+			    <p>
+
+			        <strong>Status :</strong>
+
+			        <span th:text="${resumeUploaded ? 'Uploaded' : 'Not Uploaded'}">
+
+			            Not Uploaded
+
+			        </span>
+
+			    </p>
+
+			    <p>
+
+			        <strong>Resume :</strong>
+
+			        <span th:text="${uploadedResumeName}">
+
+			            Not Available
+
+			        </span>
+
+			    </p>
+
+			    <p>
+
+			        <strong>Resume Score :</strong>
+
+			        <span th:text="${resumeScore + '%'}">
+
+			            0%
+
+			        </span>
+
+			    </p>
+
+			    <p>
+
+			        <strong>ATS Score :</strong>
+
+			        <span th:text="${atsScore + '%'}">
+
+			            0%
+
+			        </span>
+
+			    </p>
+
+			</div>
+
+
+			<!-- ===================================================== -->
+			<!-- SUCCESS MESSAGE -->
+			<!-- ===================================================== -->
+
+			<div th:if="${success}"
+			     class="success-message">
+
+			    <h3 style="color:#4ade80;">
+
+			        ✅ Resume Uploaded Successfully
+
+			    </h3>
+
+			    <p>
+
+			        <strong>File :</strong>
+
+			        <span th:text="${uploadedResumeName}">
+
+			        </span>
+
+			    </p>
+
+			    <a href="/candidate/analysis">
+
+			        <button class="upload-btn">
+
+			            View ATS Report
+
+			        </button>
+
+			    </a>
+
+			</div>
+
+
+			<!-- ===================================================== -->
+			<!-- ERROR MESSAGE -->
+			<!-- ===================================================== -->
+
+			<div th:if="${error}"
+			     class="error-message">
+
+			    <h3 style="color:#ef4444;">
+
+			        ❌
+
+			        <span th:text="${error}">
+
+			        </span>
+
+			    </h3>
+
+			</div>
+
+
+			<!-- ===================================================== -->
+			<!-- RESUME UPLOAD -->
+			<!-- ===================================================== -->
+
+			<h2 class="section-title">
+
+			    Upload Resume
+
+			</h2>
+
+			<div class="upload-card">
+
+			    <form action="/candidate/uploadResume"
+			          method="post"
+			          enctype="multipart/form-data">
+
+			        <div class="upload-icon">
+
+			            <i class="fa-solid fa-cloud-arrow-up"></i>
+
+			        </div>
+
+			        <h3>
+
+			            Upload Your Resume
+
+			        </h3>
+
+			        <p>
+
+			            PDF or DOCX files are supported.
+
+			        </p>
+
+			        <input
+
+			                type="file"
+
+			                id="resumeFile"
+
+			                name="resume"
+
+			                accept=".pdf,.doc,.docx"
+
+			                hidden
+
+			                onchange="showFileName(this)"
+
+			                required>
+
+			        <button
+
+			                type="button"
+
+			                class="upload-btn"
+
+			                onclick="document.getElementById('resumeFile').click()">
+
+			            Choose Resume
+
+			        </button>
+
+			        <p id="fileName"
+			           style="margin-top:15px;">
+
+			        </p>
+
+			        <button
+
+			                type="submit"
+
+			                class="upload-btn"
+
+			                style="margin-top:20px;">
+
+			            Upload Resume
+
+			        </button>
+
+			    </form>
+
+			</div>
+			            <!-- ===================================================== -->
+			            <!-- QUICK ACTIONS -->
+			            <!-- ===================================================== -->
+
+						<!-- ===================================================== -->
+						<!-- QUICK ACTIONS -->
+						<!-- ===================================================== -->
+
+						<h2 class="section-title">
+						    Quick Actions
+						</h2>
+
+						<div class="actions-grid">
+
+						   
+
+
+						    <!-- Browse Jobs -->
+						    <div class="action-card"
+						         onclick="window.location.href='/candidate/jobs'"
+						         style="cursor:pointer;">
+
+						        <i class="fa-solid fa-briefcase"></i>
+
+						        <h3>Browse Jobs</h3>
+
+						        <p>
+						            Explore available job opportunities and apply.
+						        </p>
+
+						    </div>
+
+
+						    <!-- My Applications -->
+						    <div class="action-card"
+						         onclick="window.location.href='/candidate/applications'"
+						         style="cursor:pointer;">
+
+						        <i class="fa-solid fa-file-circle-check"></i>
+
+						        <h3>My Applications</h3>
+
+						        <p>
+						            Track your applications and view their latest status.
+						        </p>
+
+						    </div>
+
+						</div>
+
+
+			            <!-- ===================================================== -->
+			            <!-- DASHBOARD STATUS -->
+			            <!-- ===================================================== -->
+
+			            <h2 class="section-title">
+
+			                Dashboard Status
+
+			            </h2>
+
+			            <div class="activity-card">
+
+			                <div class="activity-item">
+
+			                    <i class="fa-solid fa-circle-info"></i>
+
+			                    <div>
+
+			                        <h4>
+
+			                            Resume Status
+
+			                        </h4>
+
+			                        <p
+			                            th:text="${resumeUploaded ? 'Resume uploaded successfully.' : 'Resume not uploaded yet.'}">
+
+			                            Resume not uploaded yet.
+
+			                        </p>
+
+			                    </div>
+
+			                </div>
+
+
+			                <div class="activity-item">
+
+			                    <i class="fa-solid fa-user-check"></i>
+
+			                    <div>
+
+			                        <h4>
+
+			                            Profile Completion
+
+			                        </h4>
+
+			                        <p>
+
+			                            <span th:text="${profileCompletion}">
+
+			                                0
+
+			                            </span>%
+
+			                            Completed
+
+			                        </p>
+
+			                    </div>
+
+			                </div>
+
+
+			                <div class="activity-item">
+
+			                    <i class="fa-solid fa-folder-open"></i>
+
+			                    <div>
+
+			                        <h4>
+
+			                            Portfolio Completion
+
+			                        </h4>
+
+			                        <p>
+
+			                            <span th:text="${portfolioCompletion}">
+
+			                                0
+
+			                            </span>%
+
+			                            Completed
+
+			                        </p>
+
+			                    </div>
+
+			                </div>
+
+			            </div>
+
+			        </section>
+
+			    </main>
+
+			</div>
+
+			<script>
+
+			function showFileName(input){
+
+			    if(input.files.length > 0){
+
+			        document.getElementById("fileName").innerHTML =
+			            "<strong>Selected File:</strong> "
+			            + input.files[0].name;
+
+			    }
+
+			}
+
+			</script>
+
+			</body>
+
+			</html>

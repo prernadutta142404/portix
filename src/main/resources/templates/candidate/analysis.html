@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Resume Analysis | PORTIX</title>
+
+<link rel="stylesheet" th:href="@{/css/dashboard.css}">
+
+<style>
+
+body{
+    background:#0b1020;
+    color:white;
+    font-family:Arial, sans-serif;
+    padding:40px;
+}
+
+.container{
+    max-width:1100px;
+    margin:auto;
+}
+
+.card{
+    background:#141b34;
+    border-radius:16px;
+    padding:25px;
+    margin-bottom:25px;
+    box-shadow:0 10px 25px rgba(0,0,0,.25);
+}
+
+.progress{
+    width:100%;
+    height:18px;
+    background:#222;
+    border-radius:20px;
+    overflow:hidden;
+}
+
+.progress-fill{
+    height:18px;
+    background:#4ade80;
+}
+
+.skill{
+    padding:10px;
+    margin:8px 0;
+    border-radius:8px;
+}
+
+.match{
+    background:#153d28;
+}
+
+.miss{
+    background:#4b1f1f;
+}
+
+h1,h2,h3{
+    margin-bottom:15px;
+}
+
+.back-btn{
+    background:#4f46e5;
+    color:white;
+    padding:12px 22px;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    font-size:16px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Resume Analysis</h1>
+
+<p style="color:#b8c1ec; margin-bottom:25px;">
+
+    Your resume has been analyzed successfully.
+    Review your ATS score, matched skills, missing skills and suggestions
+    to improve your chances of getting shortlisted.
+
+</p>
+
+<div class="card">
+
+<h2>Uploaded Resume</h2>
+
+<p th:text="${uploadedFile}"></p>
+
+</div>
+
+<div class="card">
+
+<h2>ATS Score</h2>
+
+<h1 style="font-size:60px;"
+    th:text="${analysis.resumeScore + '%'}"></h1>
+	<h3>
+
+	    Resume Strength :
+	    <span th:text="${analysis.resumeStrength}">
+	        Not Available
+	    </span>
+
+	</h3>
+
+	<h3>
+
+	    Recommended Role :
+	    <span th:text="${analysis.recommendedRole}">
+	        Not Available
+	    </span>
+
+	</h3>
+<div class="progress">
+
+<div class="progress-fill"
+     th:style="'width:' + ${analysis.resumeScore} + '%'">
+
+</div>
+
+</div>
+
+<br>
+
+<p>
+
+    Matched Skills :
+    <strong th:text="${analysis.matchedSkillCount}">0</strong>
+
+    /
+
+    <strong th:text="${analysis.totalSkillCount}">0</strong>
+
+</p>
+
+</div>
+
+<div class="card">
+
+	<h2>
+
+	    ✅ Matched Skills
+
+	</h2>
+
+<div th:each="skill : ${analysis.matchedSkills}"
+     class="skill match">
+
+✅ <span th:text="${skill}"></span>
+
+</div>
+
+</div>
+
+<div class="card">
+
+	<h2>
+
+	    ❌ Missing Skills
+
+	</h2>
+
+<div th:each="skill : ${analysis.missingSkills}"
+     class="skill miss">
+
+❌ <span th:text="${skill}"></span>
+
+</div>
+
+</div>
+
+<div class="card">
+
+	<h2>
+
+	    💡 Improvement Suggestions
+
+	</h2>
+
+
+
+<div th:each="suggestion : ${analysis.suggestions}"
+     class="skill">
+
+    💡 <span th:text="${suggestion}"></span>
+
+</div>
+
+</div>
+
+<a th:href="@{/candidate/dashboard}">
+<button class="back-btn">
+
+Back to Dashboard
+
+</button>
+</a>
+
+</div>
+
+</body>
+</html>

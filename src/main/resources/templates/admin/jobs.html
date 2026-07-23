@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Pending Jobs | PORTIX Admin</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        body {
+            background: #0b1023;
+            color: white;
+            padding: 40px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        h1 {
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #b7bfd8;
+            margin-bottom: 35px;
+        }
+
+        .job-card {
+            background: #18213d;
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 18px;
+            padding: 28px;
+            margin-bottom: 25px;
+        }
+
+        .job-card h2 {
+            margin-bottom: 15px;
+        }
+
+        .job-card p {
+            color: #b8bfd8;
+            margin-bottom: 10px;
+        }
+
+        .status {
+            display: inline-block;
+            background: #f59e0b;
+            padding: 7px 15px;
+            border-radius: 20px;
+            margin: 12px 0;
+            font-weight: 600;
+        }
+
+        .actions {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .approve-btn,
+        .reject-btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 10px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .approve-btn {
+            background: #1bbf73;
+        }
+
+        .reject-btn {
+            background: #dc3545;
+        }
+
+        .empty-message {
+            background: #18213d;
+            padding: 30px;
+            border-radius: 18px;
+            color: #b8bfd8;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Admin Job Review</h1>
+
+    <p class="subtitle">
+        Review recruiter job submissions before they are published.
+    </p>
+
+    <!-- No Pending Jobs -->
+    <div class="empty-message"
+         th:if="${#lists.isEmpty(jobs)}">
+
+        No jobs are currently waiting for review.
+
+    </div>
+
+    <!-- Pending Jobs -->
+    <div class="job-card"
+         th:each="job : ${jobs}">
+
+        <h2 th:text="${job.jobTitle}">
+            Job Title
+        </h2>
+
+        <p>
+            <strong>Company:</strong>
+            <span th:text="${job.companyName}"></span>
+        </p>
+
+        <p>
+            <strong>Location:</strong>
+            <span th:text="${job.location}"></span>
+        </p>
+
+        <p>
+            <strong>Employment Type:</strong>
+            <span th:text="${job.employmentType}"></span>
+        </p>
+
+        <p>
+            <strong>Experience:</strong>
+            <span th:text="${job.experience}"></span>
+        </p>
+
+        <p>
+            <strong>Salary:</strong>
+            <span th:text="${job.salary}"></span>
+        </p>
+
+        <p>
+            <strong>Required Skills:</strong>
+            <span th:text="${job.requiredSkills}"></span>
+        </p>
+
+        <p>
+            <strong>Recruiter ID:</strong>
+            <span th:text="${job.recruiterId}"></span>
+        </p>
+
+        <div class="status">
+            Pending Review
+        </div>
+
+        <div class="actions">
+
+            <button class="approve-btn"
+                    th:onclick="|window.location.href='/admin/jobs/approve/' + ${job.id}|">
+                Approve
+            </button>
+
+            <button class="reject-btn"
+                    th:onclick="|if(confirm('Are you sure you want to reject this job?')) { window.location.href='/admin/jobs/reject/' + ${job.id}; }|">
+                Reject
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

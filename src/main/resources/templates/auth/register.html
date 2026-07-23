@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Register | Portix</title>
+
+    <link rel="stylesheet" th:href="@{/css/register.css}">
+
+</head>
+
+<body>
+
+<div class="register-page">
+
+    <!-- LEFT -->
+
+    <div class="register-left">
+
+        <img th:src="@{/images/icon logo.png}" class="hero-logo">
+
+        <h1>Create Your Professional Portfolio</h1>
+
+        <p>
+
+            Join PORTIX and create an AI-powered portfolio,
+            improve your ATS score and get discovered by recruiters.
+
+        </p>
+
+        <div class="feature-list">
+
+            <div class="feature">📄 AI Resume Analysis</div>
+
+            <div class="feature">📊 ATS Score Checker</div>
+
+            <div class="feature">💼 Portfolio Builder</div>
+
+            <div class="feature">🤖 Recruiter Matching</div>
+
+        </div>
+
+    </div>
+
+    <!-- RIGHT -->
+
+    <div class="register-right">
+
+        <div class="register-card">
+
+            <img th:src="@{/images/navbar logo.png}" class="register-logo">
+
+            <h2>Create Account</h2>
+
+            <p>Start building your future today.</p>
+
+            <form id="registerForm">
+
+                <input
+                        type="text"
+                        id="name"
+                        placeholder="Full Name"
+                        required>
+
+                <input
+                        type="email"
+                        id="email"
+                        placeholder="Email Address"
+                        required>
+						
+						<button type="button" id="sendOtpBtn">
+						    Send OTP
+						</button>
+
+						<div id="otpSection" style="display: none;">
+
+						    <input
+						        type="text"
+						        id="otp"
+						        placeholder="Enter 6-digit OTP"
+						        maxlength="6">
+
+						    <button type="button" id="verifyOtpBtn">
+						        Verify OTP
+						    </button>
+
+						</div>
+
+                <input
+                        type="password"
+                        id="password"
+                        placeholder="Password"
+                        required>
+
+                <button type="submit">
+
+                    Create Account
+
+                </button>
+
+            </form>
+
+            <div class="login-link">
+
+                Already have an account?
+
+                <a th:href="@{/login}">
+
+                    Login
+
+                </a>
+
+            </div>
+
+            <p id="message"></p>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script th:src="@{/js/script.js}"></script>
+
+</body>
+</html>

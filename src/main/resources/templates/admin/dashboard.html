@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | PORTIX</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: #080d1d;
+            color: white;
+        }
+
+        .navbar {
+            padding: 25px 60px;
+            border-bottom: 1px solid #252c42;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 30px;
+            font-weight: 800;
+            letter-spacing: 2px;
+        }
+
+        .logo span {
+            color: #805cff;
+        }
+
+        .manage-btn {
+            padding: 13px 22px;
+            background: #7654ff;
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 600;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 60px 40px;
+        }
+
+        .heading h1 {
+            font-size: 42px;
+            margin-bottom: 10px;
+        }
+
+        .heading p {
+            color: #aeb9d6;
+            font-size: 18px;
+            margin-bottom: 45px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+        }
+
+        .stat-card {
+            background: #17213d;
+            border: 1px solid #2d3859;
+            border-radius: 16px;
+            padding: 28px;
+        }
+
+        .stat-card h3 {
+            color: #b6c0dd;
+            font-size: 16px;
+            margin-bottom: 18px;
+        }
+
+        .stat-card .number {
+            font-size: 38px;
+            font-weight: 700;
+        }
+
+        .total .number {
+            color: #9d87ff;
+        }
+
+        .pending .number {
+            color: #ffa31a;
+        }
+
+        .payment .number {
+            color: #4c9aff;
+        }
+
+        .published .number {
+            color: #23d18b;
+        }
+
+        .rejected .number {
+            color: #ff5c6c;
+        }
+
+        .closed .number {
+            color: #aeb9d6;
+        }
+
+        .actions {
+            margin-top: 45px;
+            background: #17213d;
+            border: 1px solid #2d3859;
+            border-radius: 16px;
+            padding: 30px;
+        }
+
+        .actions h2 {
+            margin-bottom: 10px;
+        }
+
+        .actions p {
+            color: #aeb9d6;
+            margin-bottom: 25px;
+        }
+
+        .review-btn {
+            display: inline-block;
+            background: #7654ff;
+            color: white;
+            text-decoration: none;
+            padding: 14px 25px;
+            border-radius: 10px;
+            font-weight: 600;
+        }
+
+        @media (max-width: 800px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .navbar {
+                padding: 20px;
+            }
+
+            .container {
+                padding: 40px 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<nav class="navbar">
+
+    <div class="logo">
+        PORTI<span>X</span>
+    </div>
+
+    <a href="/admin/jobs" class="manage-btn">
+        Review Jobs
+    </a>
+
+</nav>
+
+<div class="container">
+
+    <div class="heading">
+        <h1>Admin Dashboard</h1>
+        <p>Monitor and manage job activity across PORTIX.</p>
+    </div>
+
+    <div class="stats-grid">
+
+        <div class="stat-card total">
+            <h3>Total Jobs</h3>
+            <div class="number" th:text="${totalJobs}">0</div>
+        </div>
+
+        <div class="stat-card pending">
+            <h3>Pending Review</h3>
+            <div class="number" th:text="${pendingJobs}">0</div>
+        </div>
+
+        <div class="stat-card payment">
+            <h3>Payment Pending</h3>
+            <div class="number" th:text="${paymentPendingJobs}">0</div>
+        </div>
+
+        <div class="stat-card published">
+            <h3>Published Jobs</h3>
+            <div class="number" th:text="${publishedJobs}">0</div>
+        </div>
+
+        <div class="stat-card rejected">
+            <h3>Rejected Jobs</h3>
+            <div class="number" th:text="${rejectedJobs}">0</div>
+        </div>
+
+        <div class="stat-card closed">
+            <h3>Closed Jobs</h3>
+            <div class="number" th:text="${closedJobs}">0</div>
+        </div>
+
+    </div>
+
+    <div class="actions">
+
+        <h2>Job Approval Management</h2>
+
+        <p>
+            Review newly created jobs and approve or reject them
+            before they can be published on PORTIX.
+        </p>
+
+        <a href="/admin/jobs" class="review-btn">
+            Review Pending Jobs
+        </a>
+
+    </div>
+
+</div>
+
+</body>
+</html>

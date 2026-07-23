@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Candidate Details | PORTIX</title>
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<style>
+
+*{
+
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Segoe UI',sans-serif;
+
+}
+
+body{
+
+background:#0b1023;
+color:white;
+padding:40px;
+
+}
+
+.container{
+
+max-width:1200px;
+margin:auto;
+
+}
+
+h1{
+
+font-size:42px;
+margin-bottom:12px;
+
+}
+
+.subtitle{
+
+color:#b8bfd8;
+margin-bottom:40px;
+
+}
+
+/* ========================================= */
+/* PROFILE CARD */
+/* ========================================= */
+
+.profile-card{
+
+    display:flex;
+    gap:35px;
+    align-items:center;
+    background:#18213d;
+    border-radius:20px;
+    padding:35px;
+    margin-top:40px;
+    border:1px solid rgba(255,255,255,.08);
+
+}
+
+.avatar{
+
+    width:130px;
+    height:130px;
+    border-radius:50%;
+    background:linear-gradient(135deg,#3b82f6,#9333ea);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:60px;
+
+}
+
+.profile-info h2{
+
+    margin-bottom:20px;
+    font-size:36px;
+
+}
+
+.profile-info p{
+
+    margin-bottom:12px;
+    color:#c8d0e8;
+
+}
+
+.profile-info i{
+
+    color:#7c5cff;
+    width:25px;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>
+
+<i class="fa-solid fa-user"></i>
+
+Candidate Details
+
+</h1>
+
+<p class="subtitle">
+
+View complete candidate profile and resume analysis.
+
+</p>
+
+<!-- ========================================= -->
+<!-- PROFILE CARD -->
+<!-- ========================================= -->
+
+<div class="profile-card">
+
+    <div class="avatar">
+
+        <i class="fa-solid fa-user"></i>
+
+    </div>
+
+	<div class="profile-info">
+
+	    <h2 th:text="${candidate.fullName}">
+	        Candidate Name
+	    </h2>
+
+	    <p>
+	        <i class="fa-solid fa-envelope"></i>
+	        <span th:text="${candidate.email}">
+	            candidate@email.com
+	        </span>
+	    </p>
+
+	    <p>
+	        <i class="fa-solid fa-phone"></i>
+	        <span>—</span>
+	    </p>
+
+	    <p>
+	        <i class="fa-solid fa-briefcase"></i>
+	        Candidate
+	    </p>
+
+	    <p>
+	        <i class="fa-solid fa-star"></i>
+	        ATS Score : —
+	    </p>
+
+	</div>
+</div>
+
+</div>
+
+</body>
+
+</html>

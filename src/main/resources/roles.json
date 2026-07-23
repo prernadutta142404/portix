@@ -1,0 +1,171 @@
+{
+  "Backend Developer": {
+    "category": "Software Development",
+
+    "skills": [
+      "Java",
+      "Spring Boot",
+      "Spring",
+      "Hibernate",
+      "JPA",
+      "REST API",
+      "MySQL",
+      "SQL",
+      "Docker",
+      "Git",
+      "GitHub",
+      "AWS"
+    ],
+
+    "learningRoadmap": [
+      "Docker",
+      "AWS",
+      "Microservices",
+      "System Design"
+    ]
+  },
+
+  "Frontend Developer": {
+
+    "category": "Software Development",
+
+    "skills": [
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "React",
+      "Angular",
+      "Vue",
+      "Redux",
+      "Tailwind",
+      "TypeScript"
+    ],
+
+    "learningRoadmap": [
+      "React",
+      "Next.js",
+      "TypeScript"
+    ]
+  },
+
+  "Full Stack Developer": {
+
+    "category": "Software Development",
+
+    "skills": [
+      "Java",
+      "Spring Boot",
+      "React",
+      "Node.js",
+      "MongoDB",
+      "MySQL",
+      "Docker"
+    ],
+
+    "learningRoadmap": [
+      "Docker",
+      "AWS",
+      "Microservices"
+    ]
+  },
+
+  "Python Developer": {
+
+    "category": "Software Development",
+
+    "skills": [
+      "Python",
+      "Flask",
+      "Django",
+      "FastAPI",
+      "SQL",
+      "REST API"
+    ],
+
+    "learningRoadmap": [
+      "Django",
+      "Docker",
+      "CI/CD"
+    ]
+  },
+
+  "Machine Learning Engineer": {
+
+    "category": "Artificial Intelligence",
+
+    "skills": [
+      "Python",
+      "TensorFlow",
+      "PyTorch",
+      "Pandas",
+      "NumPy",
+      "Scikit-learn",
+      "OpenCV"
+    ],
+
+    "learningRoadmap": [
+      "Deep Learning",
+      "LLMs",
+      "MLOps"
+    ]
+  },
+
+  "AI Engineer": {
+
+    "category": "Artificial Intelligence",
+
+    "skills": [
+      "Python",
+      "LangChain",
+      "Transformers",
+      "RAG",
+      "Prompt Engineering",
+      "Vector Database"
+    ],
+
+    "learningRoadmap": [
+      "Agentic AI",
+      "MCP",
+      "AI Deployment"
+    ]
+  },
+
+  "Data Analyst": {
+
+    "category": "Data",
+
+    "skills": [
+      "Excel",
+      "SQL",
+      "Power BI",
+      "Tableau",
+      "Python"
+    ],
+
+    "learningRoadmap": [
+      "Statistics",
+      "Power BI",
+      "Advanced SQL"
+    ]
+  },
+
+  "DevOps Engineer": {
+
+    "category": "Cloud",
+
+    "skills": [
+      "Docker",
+      "Kubernetes",
+      "AWS",
+      "Linux",
+      "Terraform",
+      "CI/CD"
+    ],
+
+    "learningRoadmap": [
+      "Terraform",
+      "Monitoring",
+      "AWS Certification"
+    ]
+  }
+}

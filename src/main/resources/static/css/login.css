@@ -1,0 +1,326 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+
+    background:#060b1f;
+    color:white;
+    min-height:100vh;
+
+}
+
+/* PAGE */
+
+.login-page{
+
+    display:flex;
+    min-height:100vh;
+
+}
+
+/* ================= LEFT ================= */
+
+.login-left{
+
+    width:50%;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+
+    padding:70px;
+
+    background:#060b1f;
+
+}
+
+.hero-logo{
+
+    width:280px;
+
+    margin-bottom:35px;
+
+}
+
+.login-left h1{
+
+    font-size:55px;
+
+    line-height:1.2;
+
+    margin-bottom:25px;
+
+    font-weight:700;
+
+    background:linear-gradient(
+            90deg,
+            #17b8ff,
+            #7b61ff,
+            #ff9800);
+
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+
+}
+
+.login-left p{
+
+    font-size:20px;
+
+    color:#d6d6d6;
+
+    line-height:1.8;
+
+    margin-bottom:40px;
+
+}
+
+.feature-list{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:18px;
+
+}
+
+.feature{
+
+    background:#111c38;
+
+    padding:18px 24px;
+
+    border-radius:14px;
+
+    font-size:18px;
+
+    transition:.3s;
+
+}
+
+.feature:hover{
+
+    transform:translateX(8px);
+
+    background:#16254c;
+
+}
+
+/* ================= RIGHT ================= */
+
+.login-right{
+
+    width:50%;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    background:#0b132b;
+
+}
+
+/* CARD */
+
+.login-card{
+
+    width:460px;
+
+    background:rgba(255,255,255,.06);
+
+    border:1px solid rgba(255,255,255,.12);
+
+    backdrop-filter:blur(18px);
+
+    border-radius:24px;
+
+    padding:45px;
+
+    text-align:center;
+
+    box-shadow:0 20px 40px rgba(0,0,0,.45);
+
+}
+
+.login-logo{
+
+    width:230px;
+
+    margin-bottom:25px;
+
+}
+
+.login-card h2{
+
+    font-size:42px;
+
+    margin-bottom:12px;
+
+}
+
+.login-card p{
+
+    color:#cfcfcf;
+
+    margin-bottom:28px;
+
+}
+
+.login-card input{
+
+    width:100%;
+
+    padding:17px;
+
+    margin-bottom:18px;
+
+    border:none;
+
+    outline:none;
+
+    border-radius:12px;
+
+    background:#182447;
+
+    color:white;
+
+    font-size:16px;
+
+}
+
+.login-card input::placeholder{
+
+    color:#9aa7cf;
+
+}
+
+.login-card button{
+
+    width:100%;
+
+    padding:17px;
+
+    border:none;
+
+    border-radius:12px;
+
+    cursor:pointer;
+
+    font-size:19px;
+
+    font-weight:600;
+
+    color:white;
+
+    background:linear-gradient(
+            90deg,
+            #17b8ff,
+            #7b61ff,
+            #ff9800);
+
+    transition:.3s;
+
+}
+
+.login-card button:hover{
+
+    transform:translateY(-4px);
+
+    box-shadow:0 12px 30px rgba(0,0,0,.35);
+
+}
+
+.register-link{
+
+    margin-top:28px;
+
+    color:#d8d8d8;
+
+}
+
+.register-link a{
+
+    color:#19b8ff;
+
+    font-weight:600;
+
+    text-decoration:none;
+
+}
+
+.register-link a:hover{
+
+    color:#ff9800;
+
+}
+
+#message{
+
+    margin-top:20px;
+
+    font-weight:600;
+
+    color:#00ff95;
+
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:950px){
+
+.login-page{
+
+flex-direction:column;
+
+}
+
+.login-left{
+
+width:100%;
+
+padding:45px;
+
+text-align:center;
+
+}
+
+.login-right{
+
+width:100%;
+
+padding:50px 20px;
+
+}
+
+.hero-logo{
+
+width:220px;
+
+margin:auto auto 30px;
+
+}
+
+.login-left h1{
+
+font-size:42px;
+
+}
+
+.login-card{
+
+width:100%;
+
+max-width:430px;
+
+}
+
+}

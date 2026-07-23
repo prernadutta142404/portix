@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login | Portix</title>
+
+<link rel="stylesheet" th:href="@{/css/login.css}">
+</head>
+
+<body>
+	<div class="login-page">
+
+	    <div class="login-left">
+
+	        <img th:src="@{/images/icon logo.png}" class="hero-logo">
+
+	        <h1>AI Powered Career Platform</h1>
+
+	        <p>
+	            Build beautiful portfolios, analyze resumes,
+	            improve ATS score and get discovered by recruiters.
+	        </p>
+
+	        <div class="feature-list">
+
+	            <div class="feature">
+	                📄 Resume Analysis
+	            </div>
+
+	            <div class="feature">
+	                📈 ATS Score Checker
+	            </div>
+
+	            <div class="feature">
+	                💼 Portfolio Builder
+	            </div>
+
+	            <div class="feature">
+	                🤖 Smart Recruiter Matching
+	            </div>
+
+	        </div>
+
+	    </div>
+
+
+	    <div class="login-right">
+
+	        <div class="login-card">
+
+	            <img th:src="@{/images/navbar logo.png}" class="login-logo">
+
+	            <h2>Welcome Back</h2>
+
+	            <p>Login to your PORTIX account</p>
+
+	            <form id="loginForm">
+
+	                <input
+	                    type="email"
+	                    id="email"
+	                    placeholder="Email Address"
+	                    required>
+
+	                <input
+	                    type="password"
+	                    id="password"
+	                    placeholder="Password"
+	                    required>
+
+	                <button type="submit">
+	                    Login
+	                </button>
+
+	            </form>
+
+				<div class="register-link">
+
+				    Don't have an account?
+
+				    <!-- Recruiter Registration -->
+				    <a th:if="${param.role != null and param.role[0] == 'RECRUITER'}"
+				       th:href="@{/recruiter/register}">
+				        Register
+				    </a>
+
+				    <!-- Candidate Registration -->
+				    <a th:unless="${param.role != null and param.role[0] == 'RECRUITER'}"
+				       th:href="@{/register}">
+				        Register
+				    </a>
+
+				</div>
+
+	            <p id="message"></p>
+
+	        </div>
+
+	    </div>
+
+	</div>
+
+	<script th:src="@{/js/script.js}"></script>
+
+</body>
+</html>

@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Recruiter Registration | PORTIX</title>
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background:
+                radial-gradient(circle at top left,
+                rgba(124, 92, 255, 0.18),
+                transparent 35%),
+                #090b14;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 30px;
+        }
+
+        .register-container {
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .logo {
+            text-align: center;
+            font-size: 30px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            margin-bottom: 30px;
+        }
+
+        .logo span {
+            color: #8b5cf6;
+        }
+
+        .register-card {
+            background: #11131f;
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 20px;
+            padding: 40px;
+        }
+
+        .icon-box {
+            width: 70px;
+            height: 70px;
+            margin: 0 auto 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            background: rgba(139,92,246,0.15);
+            color: #a78bfa;
+            font-size: 28px;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #9ca3af;
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+
+        .input-group {
+            margin-bottom: 18px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #d1d5db;
+            font-size: 14px;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 14px 15px;
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 9px;
+            background: #1a1d2b;
+            color: white;
+            outline: none;
+        }
+
+        .input-group input:focus {
+            border-color: #8b5cf6;
+        }
+
+        .register-btn {
+            width: 100%;
+            padding: 14px;
+            margin-top: 8px;
+            border: none;
+            border-radius: 9px;
+            background: #7c3aed;
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .register-btn:hover {
+            background: #6d28d9;
+        }
+
+        #message {
+            margin-top: 18px;
+            text-align: center;
+        }
+
+        .login-link {
+            text-align: center;
+            margin-top: 25px;
+            color: #9ca3af;
+        }
+
+        .login-link a {
+            color: #a78bfa;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #9ca3af;
+            text-decoration: none;
+        }
+
+        @media(max-width: 550px) {
+            .register-card {
+                padding: 30px 22px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="register-container">
+
+    <div class="logo">
+        PORT<span>IX</span>
+    </div>
+
+    <div class="register-card">
+
+        <div class="icon-box">
+            <i class="fa-solid fa-building"></i>
+        </div>
+
+        <h1>Create Recruiter Account</h1>
+
+        <p class="subtitle">
+            Join PORTIX to create opportunities and connect
+            with talented candidates.
+        </p>
+
+        <form id="recruiterRegisterForm">
+
+            <div class="input-group">
+                <label>Recruiter Name</label>
+
+                <input type="text"
+                       id="recruiterName"
+                       placeholder="Enter your full name"
+                       required>
+            </div>
+
+            <div class="input-group">
+                <label>Work Email</label>
+
+                <input type="email"
+                       id="recruiterEmail"
+                       placeholder="Enter your work email"
+                       required>
+            </div>
+			<button type="button" id="recruiterSendOtpBtn">
+			    Send OTP
+			</button>
+
+			<div id="recruiterOtpSection" style="display: none;">
+
+			    <input
+			        type="text"
+			        id="recruiterOtp"
+			        placeholder="Enter 6-digit OTP"
+			        maxlength="6">
+
+			    <button type="button" id="recruiterVerifyOtpBtn">
+			        Verify OTP
+			    </button>
+
+			</div>
+            <div class="input-group">
+                <label>Password</label>
+
+                <input type="password"
+                       id="recruiterPassword"
+                       placeholder="Create a password"
+                       required>
+            </div>
+
+            <button type="submit"
+                    class="register-btn">
+
+                Create Recruiter Account
+
+            </button>
+
+        </form>
+
+        <p id="recruiterMessage"></p>
+
+        <div class="login-link">
+
+            Already have a recruiter account?
+
+            <a th:href="@{/login(role='RECRUITER')}">
+                Login
+            </a>
+
+        </div>
+
+        <a th:href="@{/auth}"
+           class="back-link">
+
+            ← Back to Role Selection
+
+        </a>
+
+    </div>
+
+</div>
+
+<script th:src="@{/js/script.js}"></script>
+
+</body>
+
+</html>

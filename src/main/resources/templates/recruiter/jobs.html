@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Jobs | PORTIX</title>
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+
+        *{
+
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:'Segoe UI',sans-serif;
+
+        }
+
+        body{
+
+            background:#0b1023;
+            color:white;
+            padding:40px;
+
+        }
+
+        .container{
+
+            max-width:1400px;
+            margin:auto;
+
+        }
+
+        h1{
+
+            font-size:42px;
+            margin-bottom:10px;
+
+        }
+
+        .subtitle{
+
+            color:#b7bfd8;
+            margin-bottom:40px;
+
+        }
+		
+		/* ========================================= */
+		/* TOOLBAR */
+		/* ========================================= */
+
+		.toolbar{
+
+		    display:flex;
+		    justify-content:space-between;
+		    align-items:center;
+		    gap:20px;
+		    flex-wrap:wrap;
+		    margin-bottom:40px;
+
+		}
+
+		.toolbar input{
+
+		    flex:1;
+		    min-width:280px;
+		    padding:15px 18px;
+		    border:none;
+		    border-radius:12px;
+		    background:#202a49;
+		    color:white;
+		    font-size:15px;
+		    outline:none;
+
+		}
+
+		.toolbar input::placeholder{
+
+		    color:#b8bfd8;
+
+		}
+
+		.toolbar select{
+
+		    padding:15px 18px;
+		    border:none;
+		    border-radius:12px;
+		    background:#202a49;
+		    color:white;
+		    cursor:pointer;
+		    outline:none;
+
+		}
+
+		.toolbar button{
+
+		    padding:15px 24px;
+		    border:none;
+		    border-radius:12px;
+		    background:#7c5cff;
+		    color:white;
+		    font-weight:600;
+		    cursor:pointer;
+		    transition:.3s;
+
+		}
+
+		.toolbar button:hover{
+
+		    background:#6845ff;
+
+		}
+		
+		/* ========================================= */
+		/* JOB CARDS */
+		/* ========================================= */
+
+		.job-grid{
+
+		    display:grid;
+		    grid-template-columns:repeat(auto-fit,minmax(360px,1fr));
+		    gap:30px;
+
+		}
+
+		.job-card{
+
+		    background:#18213d;
+		    border-radius:20px;
+		    padding:30px;
+		    border:1px solid rgba(255,255,255,.08);
+		    transition:.3s;
+
+		}
+
+		.job-card:hover{
+
+		    transform:translateY(-8px);
+		    box-shadow:0 15px 35px rgba(124,92,255,.20);
+
+		}
+
+		.job-card h2{
+
+		    margin-bottom:18px;
+
+		}
+
+		.job-card p{
+
+		    color:#b8bfd8;
+		    margin-bottom:12px;
+
+		}
+
+		.job-card h4{
+
+		    margin-top:25px;
+		    margin-bottom:18px;
+
+		}
+
+		.skills{
+
+		    display:flex;
+		    flex-wrap:wrap;
+		    gap:10px;
+		    margin-bottom:25px;
+
+		}
+
+		.skills span{
+
+		    background:#7c5cff;
+		    padding:8px 16px;
+		    border-radius:25px;
+		    font-size:14px;
+
+		}
+
+		.actions{
+
+		    display:flex;
+		    gap:15px;
+
+		}
+
+		.view-btn{
+
+		    flex:1;
+		    padding:12px;
+		    border:none;
+		    border-radius:10px;
+		    background:#7c5cff;
+		    color:white;
+		    cursor:pointer;
+		    font-weight:600;
+
+		}
+
+		.view-btn:hover{
+
+		    background:#6845ff;
+
+		}
+
+		.edit-btn{
+
+		    flex:1;
+		    padding:12px;
+		    border:none;
+		    border-radius:10px;
+		    background:#dc3545;
+		    color:white;
+		    cursor:pointer;
+		    font-weight:600;
+
+		}
+
+		.edit-btn:hover{
+
+		    background:#bb2d3b;
+
+		}
+		
+		.delete-btn{
+
+		    background:#dc3545;
+		    color:white;
+		    border:none;
+		    padding:14px 28px;
+		    border-radius:10px;
+		    cursor:pointer;
+		    font-weight:600;
+		    transition:0.3s;
+
+		}
+
+		.delete-btn:hover{
+
+		    background:#bb2d3b;
+
+		}
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>
+
+        <i class="fa-solid fa-briefcase"></i>
+
+        Job Openings
+
+    </h1>
+
+    <p class="subtitle">
+
+        Create and manage job openings efficiently.
+
+    </p>
+	
+	<!-- ========================================= -->
+	<!-- TOOLBAR -->
+	<!-- ========================================= -->
+
+	<div class="toolbar">
+
+	    <input
+	        type="text"
+	        placeholder="Search job...">
+
+	    <select>
+
+	        <option>All Departments</option>
+
+	        <option>Software Development</option>
+
+	        <option>Data Science</option>
+
+	        <option>Artificial Intelligence</option>
+
+	        <option>UI / UX</option>
+
+	    </select>
+
+		<button
+		onclick="window.location.href='/recruiter/jobs/create'">
+
+		    <i class="fa-solid fa-plus"></i>
+
+		    Create Job
+
+		</button>
+		
+	</div>
+	
+	<!-- ========================================= -->
+	<!-- JOB CARDS -->
+	<!-- ========================================= -->
+
+	<div class="job-grid">
+
+	    <div
+	    class="job-card"
+	    th:each="job : ${jobs}">
+
+	    
+
+		
+
+		<h2
+		style="margin-bottom:8px;"
+		th:text="${job.jobTitle}">
+
+		    Job Title
+
+		</h2>
+		
+		<p>
+
+		<i class="fa-solid fa-location-dot"></i>
+
+		<span th:text="${job.location}"></span>
+
+		•
+
+		<span th:text="${job.employmentType}"></span>
+
+		</p>
+
+		<p>
+
+		    <i class="fa-solid fa-building"></i>
+
+			<span
+			style="font-weight:600;color:#9fa8da;"
+			th:text="${job.companyName}">
+
+		</p>
+
+		<p>
+
+		    <i class="fa-solid fa-calendar-days"></i>
+
+		    Posted :
+
+		    <span th:text="${job.postedDate}"></span>
+
+		</p>
+		
+		<div style="margin:18px 0;">
+
+			<div style="margin:18px 0;">
+
+			    <!-- PENDING REVIEW -->
+			    <span th:if="${job.status == 'PENDING_REVIEW'}"
+			          style="
+			          background:#f59e0b;
+			          color:white;
+			          padding:7px 15px;
+			          border-radius:20px;
+			          font-size:13px;
+			          font-weight:600;">
+
+			        Pending Review
+
+			    </span>
+
+
+			    <!-- PAYMENT PENDING -->
+			    <span th:if="${job.status == 'PAYMENT_PENDING'}"
+			          style="
+			          background:#3b82f6;
+			          color:white;
+			          padding:7px 15px;
+			          border-radius:20px;
+			          font-size:13px;
+			          font-weight:600;">
+
+			        Payment Pending
+
+			    </span>
+
+
+			    <!-- PUBLISHED -->
+			    <span th:if="${job.status == 'PUBLISHED'}"
+			          style="
+			          background:#1bbf73;
+			          color:white;
+			          padding:7px 15px;
+			          border-radius:20px;
+			          font-size:13px;
+			          font-weight:600;">
+
+			        Published
+
+			    </span>
+
+
+			    <!-- REJECTED -->
+			    <span th:if="${job.status == 'REJECTED'}"
+			          style="
+			          background:#dc3545;
+			          color:white;
+			          padding:7px 15px;
+			          border-radius:20px;
+			          font-size:13px;
+			          font-weight:600;">
+
+			        Rejected
+
+			    </span>
+				
+				<!-- CLOSED -->
+				<span th:if="${job.status == 'CLOSED'}"
+				      style="
+				      background:#6b7280;
+				      color:white;
+				      padding:7px 15px;
+				      border-radius:20px;
+				      font-size:13px;
+				      font-weight:600;">
+
+				    Closed
+
+				</span>
+
+			</div>
+
+		</div>
+
+		<h4>
+
+		    Required Skills
+
+		</h4>
+
+		<p>
+
+		    <strong>Experience:</strong>
+
+		    <span th:text="${job.experience}"></span>
+
+		</p>
+
+		<p>
+
+		    <strong>Salary:</strong>
+
+		    <span th:text="${job.salary}"></span>
+
+		</p>
+
+		<div class="skills">
+
+		    <span th:text="${job.requiredSkills}"></span>
+
+		</div>
+
+		<div class="action-buttons">
+			
+			<!-- PAY & PUBLISH: Only Payment Pending jobs -->
+			<button
+			    th:if="${job.status == 'PAYMENT_PENDING'}"
+			    class="view-btn"
+			    th:onclick="|window.location.href='/recruiter/jobs/payment/' + ${job.id}|">
+
+			    Pay & Publish
+
+			</button>
+
+			<a class="view-btn"
+			   th:href="@{/recruiter/job/{id}/applicants(id=${job.id})}">
+			    View Applicants
+			</a>
+
+		    <button
+		    class="edit-btn"
+		    th:onclick="|window.location.href='/recruiter/jobs/edit/' + ${job.id}|">
+
+		        Edit
+
+		    </button>
+
+			<!-- DELETE: Only Pending Review or Rejected jobs -->
+			<button
+			    th:if="${job.status == 'PENDING_REVIEW' or job.status == 'REJECTED'}"
+			    class="delete-btn"
+			    th:onclick="|if(confirm('Are you sure you want to delete this job? This action cannot be undone.')) { window.location.href='/recruiter/jobs/delete/' + ${job.id}; }|">
+
+			    Delete
+
+			</button>
+
+			<!-- CLOSE: Only Published jobs -->
+			<button
+			    th:if="${job.status == 'PUBLISHED'}"
+			    class="delete-btn"
+			    th:onclick="|if(confirm('Are you sure you want to close this job? Candidates will no longer be able to apply, but existing applications will remain safe.')) { window.location.href='/recruiter/jobs/close/' + ${job.id}; }|">
+
+			    Close Job
+
+			</button>
+		</div>
+
+	        </div>
+
+	    </div>
+		
+		
+
+	   
+</div>
+
+</body>
+
+</html>

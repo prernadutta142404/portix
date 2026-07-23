@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <title>PORTIX</title>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+
+</head>
+
+<body>
+
+<nav>
+
+    <div class="logo">
+
+        <img th:src="@{/images/logo.png}" width="65">
+
+        <span>PORTIX</span>
+
+    </div>
+
+    <div>
+
+        <a href="/">Home</a>
+
+		<a th:href="@{/auth}">Login</a>
+
+		<a th:href="@{/auth}">Register</a>
+        
+
+    </div>
+
+</nav>
+
+<section class="hero">
+
+    <h1>
+        AI Powered Resume & Portfolio Platform
+    </h1>
+
+    <p>
+
+        Build a professional portfolio,
+        analyze resumes,
+        improve ATS score,
+        and connect recruiters with the best candidates.
+
+    </p>
+
+	<a th:href="@{/auth}">
+	    Get Started
+	</a>
+
+</section>
+
+<section class="features">
+
+<div class="card">
+
+<h2>Resume Analysis</h2>
+
+<p>
+Analyze resumes using AI and identify strengths.
+</p>
+
+</div>
+
+<div class="card">
+
+<h2>ATS Score</h2>
+
+<p>
+Check how ATS-friendly your resume is.
+</p>
+
+</div>
+
+<div class="card">
+
+<h2>Portfolio Builder</h2>
+
+<p>
+Create a beautiful portfolio in minutes.
+</p>
+
+</div>
+
+<div class="card">
+
+<h2>Recruiter Matching</h2>
+
+<p>
+Connect recruiters with the best candidates.
+</p>
+
+</div>
+
+</section>
+
+<footer>
+
+© 2026 PORTIX | AI Powered Resume & Portfolio Platform
+
+</footer>
+
+</body>
+</html>
