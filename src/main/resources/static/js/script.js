@@ -15,7 +15,6 @@ if (loginForm) {
         const message = document.getElementById("message");
 
         // Get selected role from URL
-        // Example: /login?role=RECRUITER
         const params = new URLSearchParams(window.location.search);
         const selectedRole = params.get("role");
 
@@ -30,11 +29,9 @@ if (loginForm) {
                 "/api/users/login?role=" + encodeURIComponent(selectedRole),
                 {
                     method: "POST",
-
                     headers: {
                         "Content-Type": "application/json"
                     },
-
                     body: JSON.stringify({
                         email: email,
                         password: password
@@ -42,12 +39,12 @@ if (loginForm) {
                 }
             );
 
-			if (!response.ok) {
-			    message.textContent =
-			        "Invalid credentials or incorrect account role.";
-			    return;
-			}
-            
+            if (!response.ok) {
+                message.textContent =
+                    "Invalid credentials or incorrect account role.";
+                return;
+            }
+
             const user = await response.json();
 
             if (!user || !user.id) {
@@ -56,7 +53,6 @@ if (loginForm) {
                 return;
             }
 
-            // Extra frontend role verification
             if (user.role !== selectedRole) {
 
                 message.textContent =
@@ -67,18 +63,9 @@ if (loginForm) {
                 return;
             }
 
-            // Optional local storage
-            localStorage.setItem(
-                "loggedInUserId",
-                user.id
-            );
+            localStorage.setItem("loggedInUserId", user.id);
+            localStorage.setItem("loggedInUserEmail", user.email);
 
-            localStorage.setItem(
-                "loggedInUserEmail",
-                user.email
-            );
-
-            // Role-based redirect
             if (user.role === "CANDIDATE") {
 
                 window.location.href =
@@ -113,106 +100,8 @@ if (loginForm) {
 // ==========================================================
 // CANDIDATE REGISTRATION
 // ==========================================================
-let candidateOtpVerified = false;
 
-const sendOtpBtn = document.getElementById("sendOtpBtn");
-const verifyOtpBtn = document.getElementById("verifyOtpBtn");
-const otpSection = document.getElementById("otpSection");
-
-if (sendOtpBtn) {
-
-    sendOtpBtn.addEventListener("click", async function() {
-
-        const email = document.getElementById("email").value;
-        const message = document.getElementById("message");
-
-        if (!email) {
-            message.textContent = "Please enter your email first.";
-            return;
-        }
-
-        try {
-
-            const response = await fetch(
-                "/api/users/send-otp?email=" + encodeURIComponent(email),
-                {
-                    method: "POST"
-                }
-            );
-
-            if (!response.ok) {
-                message.textContent = "Failed to send OTP. Please try again.";
-                return;
-            }
-
-            candidateOtpVerified = false;
-            otpSection.style.display = "block";
-
-            message.textContent =
-                "OTP sent successfully. Please check your email.";
-
-        } catch (error) {
-
-            console.error(error);
-            message.textContent =
-                "Something went wrong while sending OTP.";
-        }
-
-    });
-}
-
-
-if (verifyOtpBtn) {
-
-    verifyOtpBtn.addEventListener("click", async function() {
-
-        const email = document.getElementById("email").value;
-        const otp = document.getElementById("otp").value;
-        const message = document.getElementById("message");
-
-        if (!otp) {
-            message.textContent = "Please enter the OTP.";
-            return;
-        }
-
-        try {
-
-            const response = await fetch(
-                "/api/users/verify-otp?email=" +
-                encodeURIComponent(email) +
-                "&otp=" +
-                encodeURIComponent(otp),
-                {
-                    method: "POST"
-                }
-            );
-
-            if (!response.ok) {
-                candidateOtpVerified = false;
-                message.textContent =
-                    "Invalid or expired OTP.";
-                return;
-            }
-
-            candidateOtpVerified = true;
-
-            message.textContent =
-                "Email verified successfully!";
-
-        } catch (error) {
-
-            console.error(error);
-
-            candidateOtpVerified = false;
-
-            message.textContent =
-                "Something went wrong while verifying OTP.";
-        }
-
-    });
-}
-const registerForm =
-    document.getElementById("registerForm");
+const registerForm = document.getElementById("registerForm");
 
 if (registerForm) {
 
@@ -221,17 +110,10 @@ if (registerForm) {
         async function(event) {
 
             event.preventDefault();
-			event.preventDefault();
 
-			if (!candidateOtpVerified) {
-			    document.getElementById("message").textContent =
-			        "Please verify your email before creating an account.";
-			    return;
-			}
+            const fullName =
+                document.getElementById("name").value;
 
-			const fullName =
-			    document.getElementById("name").value;
-            
             const email =
                 document.getElementById("email").value;
 
@@ -249,40 +131,40 @@ if (registerForm) {
                         method: "POST",
 
                         headers: {
-                            "Content-Type":
-                                "application/json"
+                            "Content-Type": "application/json"
                         },
 
                         body: JSON.stringify({
 
                             fullName: fullName,
-
                             email: email,
-
                             password: password,
-
                             role: "CANDIDATE"
 
                         })
 
                     });
 
-					if (!response.ok) {
+                if (!response.ok) {
 
-					    const errorText = await response.text();
+                    const errorText = await response.text();
 
-					    if (errorText.includes("Email already registered")) {
-					        message.textContent =
-					            "This email is already registered. Please login instead.";
-					    } else {
-					        message.textContent =
-					            "Registration failed. Please try again.";
-					    }
+                    if (errorText.includes("Email already registered")) {
 
-					    return;
-					}
-                const user =
-                    await response.json();
+                        message.textContent =
+                            "This email is already registered. Please login instead.";
+
+                    } else {
+
+                        message.textContent =
+                            "Registration failed. Please try again.";
+
+                    }
+
+                    return;
+                }
+
+                const user = await response.json();
 
                 if (!user || !user.id) {
 
@@ -312,131 +194,16 @@ if (registerForm) {
             }
 
         }
+
     );
 
 }
-
-
 // ==========================================================
 // RECRUITER REGISTRATION
 // ==========================================================
-let recruiterOtpVerified = false;
 
-const recruiterSendOtpBtn =
-    document.getElementById("recruiterSendOtpBtn");
-
-const recruiterVerifyOtpBtn =
-    document.getElementById("recruiterVerifyOtpBtn");
-
-const recruiterOtpSection =
-    document.getElementById("recruiterOtpSection");
-
-
-if (recruiterSendOtpBtn) {
-
-    recruiterSendOtpBtn.addEventListener("click", async function() {
-
-        const email =
-            document.getElementById("recruiterEmail").value;
-
-        const message =
-            document.getElementById("recruiterMessage");
-
-        if (!email) {
-            message.textContent = "Please enter your email first.";
-            return;
-        }
-
-        try {
-
-            const response = await fetch(
-                "/api/users/send-otp?email=" +
-                encodeURIComponent(email),
-                {
-                    method: "POST"
-                }
-            );
-
-            if (!response.ok) {
-                message.textContent =
-                    "Failed to send OTP. Please try again.";
-                return;
-            }
-
-            recruiterOtpVerified = false;
-            recruiterOtpSection.style.display = "block";
-
-            message.textContent =
-                "OTP sent successfully. Please check your email.";
-
-        } catch (error) {
-
-            console.error(error);
-
-            message.textContent =
-                "Something went wrong while sending OTP.";
-        }
-    });
-}
-
-
-if (recruiterVerifyOtpBtn) {
-
-    recruiterVerifyOtpBtn.addEventListener("click", async function() {
-
-        const email =
-            document.getElementById("recruiterEmail").value;
-
-        const otp =
-            document.getElementById("recruiterOtp").value;
-
-        const message =
-            document.getElementById("recruiterMessage");
-
-        if (!otp) {
-            message.textContent = "Please enter the OTP.";
-            return;
-        }
-
-        try {
-
-            const response = await fetch(
-                "/api/users/verify-otp?email=" +
-                encodeURIComponent(email) +
-                "&otp=" +
-                encodeURIComponent(otp),
-                {
-                    method: "POST"
-                }
-            );
-
-            if (!response.ok) {
-                recruiterOtpVerified = false;
-                message.textContent =
-                    "Invalid or expired OTP.";
-                return;
-            }
-
-            recruiterOtpVerified = true;
-
-            message.textContent =
-                "Email verified successfully!";
-
-        } catch (error) {
-
-            console.error(error);
-
-            recruiterOtpVerified = false;
-
-            message.textContent =
-                "Something went wrong while verifying OTP.";
-        }
-    });
-}
 const recruiterRegisterForm =
-    document.getElementById(
-        "recruiterRegisterForm"
-    );
+    document.getElementById("recruiterRegisterForm");
 
 if (recruiterRegisterForm) {
 
@@ -445,82 +212,61 @@ if (recruiterRegisterForm) {
         async function(event) {
 
             event.preventDefault();
-			if (!recruiterOtpVerified) {
-			    document.getElementById("recruiterMessage").textContent =
-			        "Please verify your email before creating an account.";
-			    return;
-			}
 
             const fullName =
-                document.getElementById(
-                    "recruiterName"
-                ).value;
+                document.getElementById("recruiterName").value;
 
             const email =
-                document.getElementById(
-                    "recruiterEmail"
-                ).value;
+                document.getElementById("recruiterEmail").value;
 
             const password =
-                document.getElementById(
-                    "recruiterPassword"
-                ).value;
+                document.getElementById("recruiterPassword").value;
 
             const message =
-                document.getElementById(
-                    "recruiterMessage"
-                );
+                document.getElementById("recruiterMessage");
 
             try {
 
                 const response =
-                    await fetch(
-                        "/api/users/register",
-                        {
+                    await fetch("/api/users/register", {
 
-                            method: "POST",
+                        method: "POST",
 
-                            headers: {
-                                "Content-Type":
-                                    "application/json"
-                            },
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
 
-                            body: JSON.stringify({
+                        body: JSON.stringify({
 
-                                fullName: fullName,
+                            fullName: fullName,
+                            email: email,
+                            password: password,
+                            role: "RECRUITER"
 
-                                email: email,
+                        })
 
-                                password: password,
+                    });
 
-                                role: "RECRUITER"
+                if (!response.ok) {
 
-                            })
+                    const errorText = await response.text();
 
-                        }
-                    );
+                    if (errorText.includes("Email already registered")) {
 
-					if (!response.ok) {
+                        message.textContent =
+                            "This email is already registered. Please login instead.";
 
-					    const errorText = await response.text();
+                    } else {
 
-					    if (errorText.includes("Email already registered")) {
+                        message.textContent =
+                            "Registration failed. Please try again.";
 
-					        message.textContent =
-					            "This email is already registered. Please login instead.";
+                    }
 
-					    } else {
+                    return;
+                }
 
-					        message.textContent =
-					            "Registration failed. Please try again.";
-
-					    }
-
-					    return;
-					}
-					
-                const user =
-                    await response.json();
+                const user = await response.json();
 
                 if (!user || !user.id) {
 
@@ -550,15 +296,7 @@ if (recruiterRegisterForm) {
             }
 
         }
+
     );
 
 }
-
-
-
-
-
-
-
-
-
