@@ -32,11 +32,11 @@ public class UserController {
                     "OTP sent successfully"
             );
 
-        } catch (Exception e) {
-
-            return ResponseEntity
-                    .internalServerError()
-                    .body("Failed to send OTP");
+        } 
+        
+        catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.internalServerError().body(e.getMessage());
         }
     }
     
